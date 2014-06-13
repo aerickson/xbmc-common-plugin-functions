@@ -100,7 +100,8 @@ def getXBMCVersion():
     for key in ["-", " "]:
         if version.find(key) -1:
             version = version[:version.find(key)]
-    version = float(version)
+    # trim from first non-float character to end of string. e.g. 13.2-ALPHA1 to 13.2
+    version = float(re.sub("[^0-9.].*", "", version))
     log(repr(version))
     return version
 
